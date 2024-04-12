@@ -1,0 +1,74 @@
+﻿@page
+@using NogetMedThreadLib.model
+
+@model NogetMedThreadsApp.Pages.Threadings.IOBasedModel
+@{
+}
+
+
+<div class="container">
+    <div class="p-5 mb-4 bg-light round-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">I/O Based problemer</h1>
+        </div>
+    </div>
+
+    <p><strong>Laver netværks forbindelser med og en uden tråde</strong></p>
+
+    <h3>Lidt baggrund</h3>
+    <p>
+        For at vise noget med netværksforbindelser, er der et 'Silly' Hotel-repository,
+        som kun har en 'get hotel med et id'<br />
+        Der er 50 hoteller i databasen, så der skal laves 50 forespørgelser over nettet.
+    </p>
+    <p>
+        Der er lavet en knap til at nulstille tabellen, samt til at hente alle hoteller uden threads. Du kan prøve dem.
+    </p>
+    <p>
+        Du skal selv lave koden til den knap der henter alle hoteller med tråde.
+    </p>
+    <p></p>
+    <form method="post">
+        <strong>Angiv antal tråde</strong>
+        @for (int i = 1; i < 11; i++)
+        {
+            if (i == 1)
+            {
+                <input type="radio" name="NoOfThreads" value="@i" asp-for="@Model.NoOfThreads" checked="checked" />
+            }
+            else
+            {
+                <input type="radio" name="NoOfThreads" value="@i" asp-for="@Model.NoOfThreads" />
+            }
+            <label for="html">@i &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        }<br />
+        <br />
+        <br />
+        <input type="submit" class="btn btn-success" value="Nulstil" asp-page-handler="Clear" />&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" class="btn btn-secondary" value="Uden tråde" asp-page-handler="Uden" />&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" class="btn btn-dark" value="Med tråde" asp-page-handler="Med" /><br />
+    </form>
+    <br />
+    <br />
+
+    <h1 class="text-success">Liste af hoteller - der tager nogle sek.</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Hotel No</th>
+                <th>Navn</th>
+                <th>Adresse</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Hotel h in @Model.Hotels)
+            {
+                <tr>
+                    <td>@h.HotelNo</td>
+                    <td>@h.Name</td>
+                    <td>@h.Address</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

@@ -1,0 +1,51 @@
+﻿@page
+@model NogetMedThreadsApp.Pages.Threadings.CPUBasedModel
+@{
+}
+
+
+<div class="container">
+    <div class="p-5 mb-4 bg-light round-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">CPU Based problemer</h1>
+        </div>
+    </div>
+
+    <p>Prøver to fiktive beregninger en med og en uden tråde</p>
+    <form method="post">
+        <strong>Antal beregninger mellem 10-40  (hver tager 200-300 msek)</strong><br />
+        <input type="number" asp-for="@Model.Times" /><br />
+        <span asp-validation-for="@Model.Times" class="text-danger"></span>
+        
+        <strong>Antal Tråde</strong><br />
+        
+        @for (int i = 1; i < 11; i++)
+        {
+            if (i == 1)
+            {
+                <input type="radio" name="NoThreads" value="@i" asp-for="@Model.NoThreads" checked="checked" />
+            }
+            else
+            {
+                <input type="radio" name="NoThreads" value="@i" asp-for="@Model.NoThreads" />
+            }
+            <label for="html">@i &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        }
+
+        <input type="submit" class="btn btn-primary" value="Prøv" /><br />
+    </form>
+
+    <p class="text-success">Resultatet kommer efter 3-8 sek.</p>
+
+    @if (Model.ResultCSnoThread != 0)
+    {
+        <p>Tiden er uden tråde @Model.ResultCSnoThread</p>
+        <p>Tiden er med tråde @Model.ResultCSWithThread</p>
+    }
+    <p></p>
+
+
+
+
+
+</div>

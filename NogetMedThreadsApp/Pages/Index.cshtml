@@ -1,0 +1,44 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container">
+    <div class="p-5 mb-4 bg-light round-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Noget med tråde i en RazorPages applikation</h1>
+        </div>
+    </div>
+
+
+    <div class="col-12">
+        <div class="row-cols-12">
+            <p>
+                Denne opgave vil demonstrere forskellige aspekter af brug af tråde i razorpages<br />
+                <br />
+                Generelt er det ikke særligt ofte, det giver mening at gøre brug af tråde i RazorPage applikationer,
+                da de afvikles på server. Dvs. at hele siden skal være samlet / færdig opbygget inden den sendes til klienten
+                (altså browseren), hvilket betyder brugen altid skal vente til alle informationerne / data til siden forefindes.a
+                Dette er i modsætning til frontend programmering, hvor du kan lave side mere responsive ved at anvende tråde
+                / alternativt async-await.
+            </p>
+
+            <p>
+                Der er to situationer hvor tråde giver mening at anvende
+            </p>
+            <ul>
+                <li>CPU based - ved 'tunge' beregninger, dem har vi almindeligvis ikke mange af</li>
+                <li>IO besed - ved specielt netværks kommunikation, dette kan forekomme i RazorPage applikationer</li>
+            </ul>
+            <h1>Prøv de to former her:</h1>
+            <form method="get">
+                <input type="submit" value="CPU Based" asp-page="Threadings/CPUBased" class="btn btn-secondary" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="IO Based" asp-page="Threadings/IOBased" class="btn btn-dark" />
+            </form>
+            
+        </div>
+    </div>
+</div>
+
